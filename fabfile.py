@@ -1,23 +1,18 @@
-#!/usr/bin/env python
-"""
-Fabric script to perform user group modifications:
-(add/remove operations require sudo privilages)
-
-- Add user to a group
-    $ fab addgrp:user=<username>,grp=<groupname>
-- Group membership checks
-    $ fab chkgrp:user=<username>
-- Remove user from groups
-    $ fab remgrp:user=<username>,exceptgrp=<groupname>
-    *Note* - exceptgrp is optional (user maintains membership)
-"""
+# !/usr/bin/env python
+###################################################
+# fabric-usergroups
+# =================
+#
+# Fabric script to perform user group modifications
+###################################################
 __author__ = 'Blayne Campbell'
 __date__ = '7/07/14'
 
-from fabric.api import *
 import logging
 import sys
 import os
+
+from fabric.api import *
 
 # Logging Configuration
 SCRIPTLOG_LEVEL_NUM = 9
@@ -32,6 +27,7 @@ def scriptlog(self, message, *args, **kws):
     :return: A log entry..
     """
     self._log(SCRIPTLOG_LEVEL_NUM, message, args, **kws)
+
 logging.Logger.scriptlog = scriptlog
 logging.basicConfig(filename='logfile.log',
                     format='%(message)s')
